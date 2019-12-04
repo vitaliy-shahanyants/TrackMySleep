@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
     <data>
-
+        <variable
+            name="viewmodel"
+            type="ca.vitos.trackmysleep.viewmodel.sleeptracker.SleepTrackerViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
