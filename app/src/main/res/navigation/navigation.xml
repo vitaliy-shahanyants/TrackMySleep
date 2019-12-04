@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    app:startDestination="@id/sleepQualityTracker">
+
+    <fragment
+        android:id="@+id/sleepQualityFragment"
+        android:name="ca.vitos.trackmysleep.view.SleepQualityFragment"
+        android:label="SleepQualityFragment" >
+        <argument
+            android:name="sleepNightKey"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_sleepQualityFragment_to_sleepQualityTracker"
+            app:destination="@id/sleepQualityTracker"
+            app:launchSingleTop="false"
+            app:popUpTo="@+id/sleepQualityTracker"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/sleepQualityTracker"
+        android:name="ca.vitos.trackmysleep.view.SleepQualityTracker"
+        android:label="SleepQualityTracker" >
+        <action
+            android:id="@+id/action_sleepQualityTracker_to_sleepQualityFragment"
+            app:destination="@id/sleepQualityFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_in_right" />
+    </fragment>
+</navigation>
