@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import ca.vitos.trackmysleep.R
 import ca.vitos.trackmysleep.database.SleepDatabase
 import ca.vitos.trackmysleep.databinding.FragmentSleepTrackerBinding
-import ca.vitos.trackmysleep.viewmodel.sleepquality.SleepQualityViewModel
 import ca.vitos.trackmysleep.viewmodel.sleeptracker.SleepTrackerViewModel
 import ca.vitos.trackmysleep.viewmodel.sleeptracker.SleepTrackerViewModelFactory
 
