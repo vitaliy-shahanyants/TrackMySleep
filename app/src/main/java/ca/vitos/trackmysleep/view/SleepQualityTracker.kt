@@ -10,10 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import ca.vitos.trackmysleep.R
+import ca.vitos.trackmysleep.adapter.sleeptracker.SleepNightAdapter
 import ca.vitos.trackmysleep.database.SleepDatabase
 import ca.vitos.trackmysleep.databinding.FragmentSleepTrackerBinding
 import ca.vitos.trackmysleep.viewmodel.sleeptracker.SleepTrackerViewModel
 import ca.vitos.trackmysleep.viewmodel.sleeptracker.SleepTrackerViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class SleepQualityTracker: Fragment() {
 
@@ -41,6 +43,23 @@ class SleepQualityTracker: Fragment() {
             }
         })
 
+        sleepTrackerViewModel.showSnackbarEvent.observe(this, Observer {
+            if (it == true){
+                Snackbar.make(activity!!.findViewById(android.R.id.content),
+                    getString(R.string.cleared_message),
+                    Snackbar.LENGTH_SHORT).show()
+                sleepTrackerViewModel.doneShowingSnackbar()
+            }
+        })
+        val adapter = SleepNightAdapter()
+        sleepTrackerViewModel.nights.observe(this, Observer {
+            it?.let {
+                adapter.data = it
+            }
+        })
+
+
+        binding.sleepList.adapter = adapter
         binding.viewmodel = sleepTrackerViewModel
 
         return binding.root

@@ -7,6 +7,7 @@
         <variable
             name="viewmodel"
             type="ca.vitos.trackmysleep.viewmodel.sleeptracker.SleepTrackerViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,32 +19,39 @@
              better and more efficient way to do this, and you will learn about
              RecyclerView in a later lesson. -->
 
-        <ScrollView
-            android:layout_width="match_parent"
+<!--        <ScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/clear_button"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/stop_button">-->
+
+<!--            &lt;!&ndash; In the TextView, we can access the nightsString LiveData,-->
+<!--                 which keeps it displayed and updated in the TextView-->
+<!--                 whenever it changes. &ndash;&gt;-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textview"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin"-->
+<!--                android:layout_marginTop="@dimen/margin"-->
+<!--                android:layout_marginEnd="@dimen/margin"-->
+<!--                android:text="@{viewmodel.nightsString}" />-->
+<!--        </ScrollView>-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sleep_list"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/clear_button"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/clear_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stop_button">
+            app:layout_constraintTop_toBottomOf="@id/stop_button"
+            />
 
-            <!-- In the TextView, we can access the nightsString LiveData,
-                 which keeps it displayed and updated in the TextView
-                 whenever it changes. -->
-
-            <TextView
-                android:id="@+id/textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin"
-                android:layout_marginTop="@dimen/margin"
-                android:layout_marginEnd="@dimen/margin"
-                android:text="@{viewmodel.nightsString}" />
-        </ScrollView>
-
-        <!-- With data binding and LiveData, we can track the buttons' visibility states
-             from the ViewModel. The click handler is in the ViewModel as well, and
-             you can set it for the Views using this lambda pattern. -->
 
         <Button
             android:id="@+id/start_button"
@@ -53,6 +61,7 @@
             android:layout_marginStart="@dimen/margin"
             android:text="@string/start"
             android:onClick="@{() -> viewmodel.onStartTracking()}"
+            android:enabled="@{viewmodel.startButtonVisible}"
             app:layout_constraintBaseline_toBaselineOf="@id/stop_button"
             app:layout_constraintEnd_toStartOf="@+id/stop_button"
             app:layout_constraintHorizontal_chainStyle="spread"
@@ -67,6 +76,7 @@
             android:layout_marginEnd="@dimen/margin"
             android:text="@string/stop"
             android:onClick="@{()-> viewmodel.onStopTracking()}"
+            android:enabled="@{viewmodel.stopButtonVisible}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/start_button"
             app:layout_constraintTop_toTopOf="parent" />
@@ -81,6 +91,7 @@
             android:layout_marginBottom="@dimen/margin"
             android:text="@string/clear"
             android:onClick="@{()->viewmodel.onClearTracking()}"
+            android:enabled="@{viewmodel.clearButtonVisible}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
